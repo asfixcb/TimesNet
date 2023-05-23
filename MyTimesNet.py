@@ -508,7 +508,7 @@ if __name__ == '__main__':
 
 
     # my_model.load_from_checkpoint(r'D:\vscode_python\lightning_logs\version_116\checkpoints\epoch=19-step=34380.ckpt', encoder = Encoder(), decoder = Decoder())
-    trainer = pl.Trainer(max_epochs=15, callbacks=[checkpoint_callback], accelerator='gpu')
+    trainer = pl.Trainer(max_epochs=50, callbacks=[checkpoint_callback], accelerator='gpu')
     trainer.fit(my_model, mnistdata)
 
     # trainer.test(my_model, datamodule=mnistdata, ckpt_path=r'/home/dongyikai/Time-Series-Library/lightning_logs/version_56269/checkpoints/last-v1.ckpt')
