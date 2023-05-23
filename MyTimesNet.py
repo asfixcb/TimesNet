@@ -334,6 +334,8 @@ class MyPL_TimesNet(pl.LightningModule):
         x, y, label = batch
         y = None
         x_hat = self.encoder(x, y).reshape(-1, 3)
+        x_hat[:,0] *= 5
+        label[:, 0] *= 5
         # x_hat = x_hat.view(-1)
         # label = label.view(-1)
         loss = nn.L1Loss()
@@ -344,6 +346,8 @@ class MyPL_TimesNet(pl.LightningModule):
         x, y, label = batch
         y = None
         x_hat = self.encoder(x, y).reshape(-1, 3)
+        x_hat[:,0] *= 5
+        label[:, 0] *= 5
         # label = label.view(-1)
         val_loss = nn.L1Loss()
         self.log("val_loss", val_loss(x_hat, label), prog_bar=True)
@@ -353,6 +357,8 @@ class MyPL_TimesNet(pl.LightningModule):
         x, y, label = batch
         y = None
         x_hat = self.encoder(x, y).reshape(-1, 3)
+        x_hat[:,0] *= 5
+        label[:, 0] *= 5
         # label = label.view(-1)
         test_loss = nn.L1Loss()
         self.log("test_loss", test_loss(x_hat, label), prog_bar=True)
@@ -508,7 +514,7 @@ if __name__ == '__main__':
 
 
     # my_model.load_from_checkpoint(r'D:\vscode_python\lightning_logs\version_116\checkpoints\epoch=19-step=34380.ckpt', encoder = Encoder(), decoder = Decoder())
-    trainer = pl.Trainer(max_epochs=50, callbacks=[checkpoint_callback], accelerator='gpu')
+    trainer = pl.Trainer(max_epochs=100, callbacks=[checkpoint_callback], accelerator='gpu')
     trainer.fit(my_model, mnistdata)
 
     # trainer.test(my_model, datamodule=mnistdata, ckpt_path=r'/home/dongyikai/Time-Series-Library/lightning_logs/version_56269/checkpoints/last-v1.ckpt')
